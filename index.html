@@ -10,7 +10,21 @@
     function toggleMenu() {
       const nav = document.querySelector("nav ul");
       nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-        </script>
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    observer.observe(item);
+  });
+</script>
 </head>
 <body>
   <header>
@@ -39,23 +53,6 @@
     </div>
   </header>
 
- 
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
-  });
-</script>
 
 <section class="bio-hero">
   <div class="bio-intro">
@@ -79,19 +76,7 @@
   </div>
 </section>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
+    
   <section class="newsletter">
     <h2>TOUTE MON ACTUALITÉ DANS VOTRE BOÎTE MAIL</h2>
     <form>
