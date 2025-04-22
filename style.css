@@ -100,31 +100,49 @@ nav a:hover {
 
 
 
-.bio-hero {
-  background-image: url('images/portrait-bio.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 80vh;
+/* === MODERN PROFILE SECTIONS === */
+.modern-profile {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.profile-block {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  position: relative;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-.bio-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 38, 84, 0.6);
+.profile-block.reverse {
+  flex-direction: row-reverse;
 }
 
-.bio-intro {
-  position: relative;
-  z-index: 1;
-  max-width: 700px;
-  padding: 20px;
+.profile-block img {
+  flex: 1 1 45%;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-text {
+  flex: 1 1 50%;
+}
+
+.profile-text h2 {
+  font-size: 2em;
+  color: #002654;
+  margin-bottom: 15px;
+}
+
+.profile-text p {
+  font-size: 1.1em;
+  color: #333;
+  line-height: 1.7;
 }
 
 .timeline-section {
