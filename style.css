@@ -98,9 +98,9 @@ nav a:hover {
   transform: scale(1.1);
 }
 
-/* Section d'introduction */
+<style>
 .bio-hero {
-  background-image: url('images/portrait-bio.jpg'); /* Remplacez par le chemin de votre image */
+  background-image: url('images/portrait-bio.jpg');
   background-size: cover;
   background-position: center;
   height: 80vh;
@@ -126,41 +126,6 @@ nav a:hover {
   padding: 20px;
 }
 
-.bio-intro h1 {
-  font-size: 3em;
-  margin-bottom: 0.3em;
-}
-
-.bio-intro h2 {
-  font-weight: normal;
-  font-size: 1.3em;
-  margin-bottom: 1em;
-}
-
-/* Section biographique */
-.bio-section {
-  padding: 60px 20px;
-  background: #f9f9f9;
-}
-
-.bio-section .container {
-  max-width: 800px;
-  margin: auto;
-}
-
-.bio-section h3 {
-  font-size: 1.8em;
-  color: #002654;
-  margin-bottom: 20px;
-}
-
-.bio-section p {
-  font-size: 1.1em;
-  line-height: 1.8;
-  color: #222;
-}
-
-/* Timeline interactive */
 .timeline-section {
   padding: 60px 20px;
   background: #ffffff;
@@ -188,12 +153,20 @@ nav a:hover {
 .timeline li {
   position: relative;
   margin-bottom: 40px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease;
+}
+
+.timeline li.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .timeline li::before {
   content: '';
   position: absolute;
-  left: -9px;
+  left: -11px;
   top: 0;
   width: 18px;
   height: 18px;
@@ -213,6 +186,7 @@ nav a:hover {
   font-size: 1.2em;
   color: #333;
 }
+</style>
 
 /* NEWSLETTER */
 .newsletter {
