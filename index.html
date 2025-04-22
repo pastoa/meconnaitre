@@ -39,8 +39,7 @@
     </div>
   </header>
 
-  <!-- Section d'introduction -->
-<section class="bio-hero">
+ <section class="bio-hero">
   <div class="bio-intro">
     <h1>Charles Ange Ginésy</h1>
     <h2>Président du Département des Alpes-Maritimes</h2>
@@ -48,58 +47,67 @@
   </div>
 </section>
 
-<!-- Section biographique -->
-<section class="bio-section">
-  <div class="container">
-    <h3>Parcours et engagements</h3>
-    <p>Charles Ange Ginésy, né le 14 mai 1956 à Nice, est le fils de Charles Ginésy, ancien sénateur et président du Conseil général des Alpes-Maritimes. Passionné par la montagne et les sports de glisse, il a dirigé l'hôtel familial à Péone-Valberg et géré la société exploitant les remontées mécaniques de la station. Son engagement politique débute en 1989 en tant que premier adjoint au maire de Péone, puis maire en 2001. Il a été élu conseiller général en 2003, président de la communauté de communes Alpes d'Azur en 2014, et président du Conseil départemental des Alpes-Maritimes en 2017.</p>
-  </div>
-</section>
-
-  <section class="timeline-section">
+<section class="timeline-section">
   <div class="container">
     <h3>Chronologie</h3>
     <ul class="timeline">
-      <li>
+      <li class="timeline-item">
         <span class="date">1989</span>
         <div class="content">
-          <h4>Élu premier adjoint au maire de Péone</h4>
+          <h4>Premier adjoint au maire de Péone</h4>
         </div>
       </li>
-      <li>
+      <li class="timeline-item">
         <span class="date">2001</span>
         <div class="content">
-          <h4>Élu maire de Péone-Valberg</h4>
+          <h4>Maire de Péone-Valberg</h4>
         </div>
       </li>
-      <li>
+      <li class="timeline-item">
         <span class="date">2003</span>
         <div class="content">
-          <h4>Élu conseiller général du canton de Guillaumes</h4>
+          <h4>Conseiller général du canton de Guillaumes</h4>
         </div>
       </li>
-      <li>
+      <li class="timeline-item">
         <span class="date">2012–2017</span>
         <div class="content">
           <h4>Député à l’Assemblée nationale</h4>
-          <p>Mandat de 5 ans (20 juin 2012 – 20 juin 2017) dans la 2<sup>e</sup> circonscription des Alpes-Maritimes.</p>
+          <p>20 juin 2012 – 20 juin 2017 (5 ans)</p>
         </div>
       </li>
-      <li>
+      <li class="timeline-item">
         <span class="date">2014</span>
         <div class="content">
-          <h4>Élu président de la communauté de communes Alpes d'Azur</h4>
+          <h4>Président de la communauté de communes Alpes d'Azur</h4>
         </div>
       </li>
-      <li>
+      <li class="timeline-item">
         <span class="date">2017</span>
         <div class="content">
-          <h4>Élu président du Conseil départemental des Alpes-Maritimes</h4>
+          <h4>Président du Conseil départemental des Alpes-Maritimes</h4>
         </div>
       </li>
     </ul>
   </div>
 </section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    observer.observe(item);
+  });
+</script>
+
 
   <section class="newsletter">
     <h2>TOUTE MON ACTUALITÉ DANS VOTRE BOÎTE MAIL</h2>
