@@ -145,96 +145,56 @@ nav a:hover {
   line-height: 1.7;
 }
 
-.timeline-section {
-  padding: 60px 20px;
-  background: #ffffff;
+/* === TIMELINE EN GRILLE === */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
 }
 
-.timeline-section {
-  padding: 60px 20px;
-  background: #ffffff;
-}
-
-.timeline-section .container {
-  max-width: 800px;
-  margin: auto;
-}
-
-.timeline-section h3 {
-  font-size: 1.8em;
-  color: #002654;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.timeline {
-  position: relative;
-  padding-left: 30px;
-  border-left: 3px solid #002654;
-  list-style: none;
-}
-
-.timeline li {
-  position: relative;
-  margin-bottom: 50px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s ease;
-  padding-left: 15px;
-  background: #f9f9f9;
+.timeline-grid .event {
+  background-color: #f5faff;
+  border-left: 4px solid #002654;
+  padding: 16px 20px;
   border-radius: 10px;
-  padding: 15px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
-.timeline li.visible {
-  opacity: 1;
-  transform: translateY(0);
+.timeline-grid .event:hover {
+  transform: translateY(-4px);
+  background-color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-.timeline li:hover {
-  background: #ffffff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
-
-.timeline li::before {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 10px;
-  width: 14px;
-  height: 14px;
-  background-color: #002654;
-  border-radius: 50%;
-  border: 2px solid white;
-  z-index: 2;
-}
-
-.timeline .date {
-  font-weight: bold;
-  font-size: 0.95em;
-  margin-bottom: 10px;
-  margin-left: 10px;
+.timeline-grid .date {
   display: inline-block;
+  font-weight: bold;
+  background-color: #002654;
   color: #ffffff;
-  background: #002654;
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-radius: 20px;
-  width: fit-content;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.9em;
+  margin-bottom: 12px;
 }
 
-.timeline .content h4 {
-  margin: 5px 0;
-  font-size: 1.2em;
-  color: #002654;
-}
-
-.timeline .content p {
-  margin: 0;
+.timeline-grid p {
   font-size: 1em;
-  color: #444;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
 }
+
+.timeline-grid p em {
+  display: block;
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 6px;
+}
+
 
 
 /* NEWSLETTER */
