@@ -13,21 +13,19 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll(".timeline li");
+    const entries = document.querySelectorAll(".timeline-entry");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver((entriesList) => {
+      entriesList.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.2
     });
 
-    items.forEach((item) => {
-      observer.observe(item);
-    });
+    entries.forEach(item => observer.observe(item));
   });
 </script>
 
