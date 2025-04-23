@@ -11,18 +11,22 @@
       const nav = document.querySelector("nav ul");
       nav.style.display = nav.style.display === "flex" ? "none" : "flex";
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  document.addEventListener("DOMContentLoaded", function () {
+    const items = document.querySelectorAll(".timeline li");
 
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    items.forEach((item) => {
+      observer.observe(item);
+    });
   });
 </script>
 </head>
