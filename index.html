@@ -7,57 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/cag-icon" href="favicon.ico">
 
-<script>
-  const slides = document.querySelectorAll('.timeline-slide');
-  const dates = document.querySelectorAll('.timeline-dates span');
-  const timeline = document.getElementById('timeline');
-
-  let index = 0;
-  let isScrolling = false;
-  let scrollUnlocked = false;
-
-  function updateSlide(newIndex) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === newIndex);
-      dates[i].classList.toggle('active', i === newIndex);
-    });
-  }
-
-  function unlockScroll() {
-    document.body.style.overflow = 'auto';
-    timeline.classList.add('unlocked');
-    scrollUnlocked = true;
-  }
-
-  function handleWheel(event) {
-    if (isScrolling || scrollUnlocked) return;
-
-    isScrolling = true;
-    const direction = event.deltaY > 0 ? 1 : -1;
-    const nextIndex = index + direction;
-
-    if (nextIndex >= 0 && nextIndex < slides.length) {
-      index = nextIndex;
-      updateSlide(index);
-    }
-
-    // Débloque le scroll à la fin
-    if (index === slides.length - 1) {
-      setTimeout(unlockScroll, 800);
-    }
-
-    setTimeout(() => {
-      isScrolling = false;
-    }, 800);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.style.overflow = 'hidden';
-    updateSlide(index);
-    window.addEventListener('wheel', handleWheel, { passive: true });
-  });
-</script>
-
 </head>
 <body>
   <header>
@@ -218,6 +167,57 @@
     </div>
   </div>
 </footer>
+
+  <script>
+  const slides = document.querySelectorAll('.timeline-slide');
+  const dates = document.querySelectorAll('.timeline-dates span');
+  const timeline = document.getElementById('timeline');
+
+  let index = 0;
+  let isScrolling = false;
+  let scrollUnlocked = false;
+
+  function updateSlide(newIndex) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === newIndex);
+      dates[i].classList.toggle('active', i === newIndex);
+    });
+  }
+
+  function unlockScroll() {
+    document.body.style.overflow = 'auto';
+    timeline.classList.add('unlocked');
+    scrollUnlocked = true;
+  }
+
+  function handleWheel(event) {
+    if (isScrolling || scrollUnlocked) return;
+
+    isScrolling = true;
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const nextIndex = index + direction;
+
+    if (nextIndex >= 0 && nextIndex < slides.length) {
+      index = nextIndex;
+      updateSlide(index);
+    }
+
+    // Débloque le scroll à la fin
+    if (index === slides.length - 1) {
+      setTimeout(unlockScroll, 800);
+    }
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 800);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.overflow = 'hidden';
+    updateSlide(index);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+  });
+</script>
 
   </body>
 
