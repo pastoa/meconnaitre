@@ -12,6 +12,7 @@
     nav.style.display = nav.style.display === "flex" ? "none" : "flex";
   }
 
+<script>
   const timelineEvents = [
     {
       year: "1989",
@@ -30,7 +31,7 @@
     },
     {
       year: "2005–2007",
-      text: "Député de la 5ᵉ circonscription des Alpes-Maritimes<br><em>3 juillet 2005 – 19 juin 2007</em>",
+      text: "Député de la 5ᵉ circonscription<br><em>3 juillet 2005 – 19 juin 2007</em>",
       image: "images/depute-2005.jpg"
     },
     {
@@ -40,29 +41,42 @@
     }
   ];
 
-  let currentSlide = 0;
+  let currentIndex = 0;
+  let isThrottled = false;
 
-  function updateSlide() {
-    const slide = timelineEvents[currentSlide];
-    document.getElementById("slide-bg").style.backgroundImage = `url('${slide.image}')`;
-    document.getElementById("slide-date").innerHTML = slide.year;
-    document.getElementById("slide-text").innerHTML = slide.text;
-    document.querySelector(".timeline-diapo").classList.remove("loaded");
-    setTimeout(() => {
-      document.querySelector(".timeline-diapo").classList.add("loaded");
-    }, 50);
+  function showSlide(index) {
+    const slide = timelineEvents[index];
+    document.getElementById("timeline-background").style.backgroundImage = `url('${slide.image}')`;
+    document.getElementById("timeline-year").innerHTML = slide.year;
+    document.getElementById("timeline-text").innerHTML = slide.text;
+
+    const zone = document.getElementById("scroll-timeline");
+    zone.classList.remove("loaded");
+    setTimeout(() => zone.classList.add("loaded"), 50);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    updateSlide();
+    showSlide(0);
+    document.getElementById("scroll-timeline").classList.add("loaded");
 
     window.addEventListener("wheel", (e) => {
-      if (e.deltaY > 0 && currentSlide < timelineEvents.length - 1) {
-        currentSlide++;
-        updateSlide();
-      } else if (e.deltaY < 0 && currentSlide > 0) {
-        currentSlide--;
-        updateSlide();
+      const zone = document.getElementById("scroll-timeline");
+      const isInTimeline = zone.getBoundingClientRect().top <= 0 && zone.getBoundingClientRect().bottom > window.innerHeight / 2;
+
+      if (isInTimeline && !isThrottled) {
+        isThrottled = true;
+
+        if (e.deltaY > 0 && currentIndex < timelineEvents.length - 1) {
+          currentIndex++;
+          showSlide(currentIndex);
+        } else if (e.deltaY < 0 && currentIndex > 0) {
+          currentIndex--;
+          showSlide(currentIndex);
+        }
+
+        setTimeout(() => {
+          isThrottled = false;
+        }, 800); // temps pour bloquer le scroll rapide
       }
     });
   });
