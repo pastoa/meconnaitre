@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/cag-icon" href="favicon.ico">
 
-  <script>
+<script>
   const slides = document.querySelectorAll('.timeline-slide');
   const dates = document.querySelectorAll('.timeline-dates span');
   const timeline = document.getElementById('timeline');
 
   let index = 0;
-  let isThrottled = false;
-  let isUnlocked = false;
+  let isScrolling = false;
+  let scrollUnlocked = false;
 
   function updateSlide(newIndex) {
     slides.forEach((slide, i) => {
@@ -26,36 +26,37 @@
   function unlockScroll() {
     document.body.style.overflow = 'auto';
     timeline.classList.add('unlocked');
-    isUnlocked = true;
+    scrollUnlocked = true;
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.style.overflow = 'hidden'; // lock scroll init
-    updateSlide(index);
-  });
+  function handleWheel(event) {
+    if (isScrolling || scrollUnlocked) return;
 
-  window.addEventListener('wheel', (e) => {
-    if (isThrottled || isUnlocked) return;
-    isThrottled = true;
+    isScrolling = true;
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const nextIndex = index + direction;
 
-    if (e.deltaY > 0 && index < slides.length - 1) {
-      index++;
-    } else if (e.deltaY < 0 && index > 0) {
-      index--;
+    if (nextIndex >= 0 && nextIndex < slides.length) {
+      index = nextIndex;
+      updateSlide(index);
     }
 
-    updateSlide(index);
-
+    // Débloque le scroll à la fin
     if (index === slides.length - 1) {
-      setTimeout(unlockScroll, 1000); // fin de la frise = on débloque
+      setTimeout(unlockScroll, 800);
     }
 
     setTimeout(() => {
-      isThrottled = false;
+      isScrolling = false;
     }, 800);
-  }, { passive: true });
-</script>
+  }
 
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.overflow = 'hidden';
+    updateSlide(index);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+  });
+</script>
 
 </head>
 <body>
