@@ -147,56 +147,90 @@ nav a:hover {
 
 /* === MOUNT CUBA STYLE SCROLL SLIDE === */
 
-.timeline-slide-zone {
+/* === TIMELINE MOUNT CUBA STYLE === */
+
+.timeline-container {
   position: relative;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #002654;
+  background-color: #000;
+  color: white;
+  font-family: 'Georgia', serif;
 }
 
-.slide-bg {
+.timeline-slide {
   position: absolute;
-  inset: 0;
+  height: 100vh;
+  width: 100%;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5);
-  transition: background-image 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
   z-index: 0;
 }
 
-.slide-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  padding: 0 20px;
-  color: white;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
-}
-
-.timeline-slide-zone.loaded .slide-content {
+.timeline-slide.active {
   opacity: 1;
-  transform: translateY(0);
+  z-index: 1;
 }
 
-.big-date {
-  font-size: 5em;
-  font-family: 'Georgia', serif;
-  margin-bottom: 20px;
+.timeline-slide h2 {
+  font-size: 6em;
+  margin: 0;
   color: white;
 }
 
-#timeline-text {
+.timeline-slide p {
   font-size: 1.3em;
+  max-width: 700px;
+  text-align: center;
+  margin: 20px 0 0;
   line-height: 1.6;
-  color: #e5e5e5;
+  color: #ddd;
 }
 
+.timeline-dates {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  z-index: 10;
+}
+
+.timeline-dates span {
+  font-size: 1.2em;
+  color: #aaa;
+  cursor: default;
+  transition: 0.3s ease;
+}
+
+.timeline-dates span.active {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.unlock-message {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: #999;
+  font-size: 1em;
+  z-index: 9;
+}
+
+.timeline-container.unlocked .unlock-message {
+  display: block;
+}
 
 
 /* NEWSLETTER */
