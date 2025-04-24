@@ -191,26 +191,43 @@ nav a:hover {
   color: #ddd;
 }
 
-.timeline-dates {
+.timeline-dates-wrapper {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 30px;
+  flex-direction: column;
+  align-items: center;
   z-index: 10;
 }
 
+.timeline-vertical-line {
+  width: 2px;
+  height: 40px;
+  background-color: white;
+  margin-bottom: 15px;
+}
+
+.timeline-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
 .timeline-dates span {
-  font-size: 1.2em;
-  color: #aaa;
+  font-size: 1.4em;
+  color: #ccc;
+  cursor: pointer;
   transition: 0.3s;
 }
 
 .timeline-dates span.active {
   color: #fff;
-  text-decoration: underline;
+  font-weight: bold;
+  text-decoration: none;
 }
+
 
 .unlock-message {
   display: none;
