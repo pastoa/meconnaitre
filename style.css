@@ -147,64 +147,57 @@ nav a:hover {
 
 /* === TIMELINE STYLE MOUNT CUBA === */
 
-.timeline-slide {
+/* === SLIDE IMMERSIVE MOUNT CUBA === */
+
+.timeline-diapo {
+  position: relative;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding: 60px 20px;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  scroll-snap-align: start;
-  overflow: hidden;
 }
 
-.timeline-slide::before {
-  content: "";
+.slide-bg {
   position: absolute;
   inset: 0;
-  background: rgba(0, 66, 153, 0.35); /* filtre bleu léger */
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7);
+  transition: background-image 0.6s ease;
   z-index: 0;
 }
 
-.timeline-content {
+.slide-content {
   position: relative;
-  z-index: 1;
-  max-width: 700px;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+  color: white;
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.8s ease;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
 }
 
-.timeline-slide.visible .timeline-content {
+.timeline-diapo.loaded .slide-content {
   opacity: 1;
   transform: translateY(0);
 }
 
 .big-date {
   font-size: 5em;
-  font-family: 'Georgia', serif;
-  color: white;
   margin-bottom: 20px;
-  animation: fadeInScale 0.8s ease forwards;
-}
-
-.timeline-content p {
-  font-size: 1.3em;
-  line-height: 1.6;
+  font-family: 'Georgia', serif;
   color: #fff;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
-.timeline-content em {
-  display: block;
-  font-size: 0.9em;
-  color: #ddd;
-  margin-top
+/* Pour éviter le scroll naturel */
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
 
 
 
