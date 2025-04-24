@@ -145,22 +145,20 @@ nav a:hover {
   line-height: 1.7;
 }
 
-/* === MOUNT CUBA STYLE SCROLL SLIDE === */
-
-/* === TIMELINE MOUNT CUBA STYLE === */
-
 .timeline-container {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-color: #000;
+  background-color: #002654;
   color: white;
   font-family: 'Georgia', serif;
 }
 
 .timeline-slide {
   position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100%;
   background-size: cover;
@@ -170,7 +168,7 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.7s ease;
   z-index: 0;
 }
 
@@ -180,23 +178,22 @@ nav a:hover {
 }
 
 .timeline-slide h2 {
-  font-size: 6em;
+  font-size: 5em;
   margin: 0;
-  color: white;
 }
 
 .timeline-slide p {
-  font-size: 1.3em;
+  font-size: 1.2em;
   max-width: 700px;
   text-align: center;
-  margin: 20px 0 0;
   line-height: 1.6;
+  margin-top: 20px;
   color: #ddd;
 }
 
 .timeline-dates {
   position: absolute;
-  bottom: 40px;
+  bottom: 30px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -207,25 +204,22 @@ nav a:hover {
 .timeline-dates span {
   font-size: 1.2em;
   color: #aaa;
-  cursor: default;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .timeline-dates span.active {
   color: #fff;
-  font-weight: bold;
   text-decoration: underline;
 }
 
 .unlock-message {
   display: none;
   position: absolute;
-  bottom: 10px;
-  width: 100%;
+  bottom: 5px;
   text-align: center;
-  color: #999;
-  font-size: 1em;
-  z-index: 9;
+  width: 100%;
+  font-size: 0.95em;
+  color: #ccc;
 }
 
 .timeline-container.unlocked .unlock-message {
