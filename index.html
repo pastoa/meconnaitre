@@ -81,12 +81,16 @@
   </div>
 
   
+  <div class="timeline-dates-wrapper">
+  <div class="timeline-vertical-line"></div>
   <div class="timeline-dates" id="dates-bar">
-    <span class="active">1989</span>
-    <span>2001</span>
-    <span>2005–2007</span>
-    <span>2021</span>
+    <span data-index="0" class="active">1989</span>
+    <span data-index="1">2001</span>
+    <span data-index="2">2005–2007</span>
+    <span data-index="3">2021</span>
   </div>
+</div>
+
 
 </section>
 
@@ -211,6 +215,15 @@
       isScrolling = false;
     }, 800);
   }
+
+  // Gestion du clic sur les dates
+dates.forEach((date, i) => {
+  date.addEventListener('click', () => {
+    index = i;
+    updateSlide(index);
+  });
+});
+
 
   document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = 'hidden';
