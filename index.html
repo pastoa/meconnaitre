@@ -6,8 +6,8 @@
   <title>Charles Ange Ginésy</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/cag-icon" href="favicon.ico">
-<script> 
 
+  <script>
   const slides = document.querySelectorAll('.timeline-slide');
   const dates = document.querySelectorAll('.timeline-dates span');
   const timeline = document.getElementById('timeline');
@@ -26,7 +26,13 @@
   function unlockScroll() {
     document.body.style.overflow = 'auto';
     timeline.classList.add('unlocked');
+    isUnlocked = true;
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.overflow = 'hidden'; // lock scroll init
+    updateSlide(index);
+  });
 
   window.addEventListener('wheel', (e) => {
     if (isThrottled || isUnlocked) return;
@@ -34,22 +40,22 @@
 
     if (e.deltaY > 0 && index < slides.length - 1) {
       index++;
-      updateSlide(index);
     } else if (e.deltaY < 0 && index > 0) {
       index--;
-      updateSlide(index);
     }
 
+    updateSlide(index);
+
     if (index === slides.length - 1) {
-      setTimeout(unlockScroll, 800);
+      setTimeout(unlockScroll, 1000); // fin de la frise = on débloque
     }
 
     setTimeout(() => {
       isThrottled = false;
-    }, 900);
+    }, 800);
   }, { passive: true });
-
 </script>
+
 
 </head>
 <body>
@@ -131,8 +137,8 @@
     <span>2021</span>
   </div>
 
-  <div class="unlock-message">Fin de la frise — vous pouvez maintenant scroller</div>
 </section>
+
 
 
   
