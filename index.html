@@ -12,21 +12,61 @@
     nav.style.display = nav.style.display === "flex" ? "none" : "flex";
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const entries = document.querySelectorAll(".timeline-entry");
+  const timelineEvents = [
+    {
+      year: "1989",
+      text: "Élu Premier adjoint au maire de Péone",
+      image: "images/valberg-1989.jpg"
+    },
+    {
+      year: "2001",
+      text: "Élu Maire de Péone-Valberg",
+      image: "images/mairie-2001.jpg"
+    },
+    {
+      year: "2003",
+      text: "Élu Conseiller général du canton de Guillaumes",
+      image: "images/conseiller-2003.jpg"
+    },
+    {
+      year: "2005–2007",
+      text: "Député de la 5ᵉ circonscription des Alpes-Maritimes<br><em>3 juillet 2005 – 19 juin 2007</em>",
+      image: "images/depute-2005.jpg"
+    },
+    {
+      year: "2021",
+      text: "Réélu Président du Département",
+      image: "images/presidence-2021.jpg"
+    }
+  ];
 
-    const observer = new IntersectionObserver((entriesList) => {
-      entriesList.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, {
-      threshold: 0.2
+  let currentSlide = 0;
+
+  function updateSlide() {
+    const slide = timelineEvents[currentSlide];
+    document.getElementById("slide-bg").style.backgroundImage = `url('${slide.image}')`;
+    document.getElementById("slide-date").innerHTML = slide.year;
+    document.getElementById("slide-text").innerHTML = slide.text;
+    document.querySelector(".timeline-diapo").classList.remove("loaded");
+    setTimeout(() => {
+      document.querySelector(".timeline-diapo").classList.add("loaded");
+    }, 50);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateSlide();
+
+    window.addEventListener("wheel", (e) => {
+      if (e.deltaY > 0 && currentSlide < timelineEvents.length - 1) {
+        currentSlide++;
+        updateSlide();
+      } else if (e.deltaY < 0 && currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
     });
-
-    entries.forEach(item => observer.observe(item));
   });
+
 </script>
 
 </head>
