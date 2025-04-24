@@ -147,36 +147,26 @@ nav a:hover {
 
 /* === TIMELINE STYLE MOUNT CUBA === */
 
-.mount-cuba-timeline {
-  background-color: #111;
-  color: white;
+.timeline-slide {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 60px 20px;
   text-align: center;
-  padding: 100px 20px;
-  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  scroll-snap-align: start;
+  overflow: hidden;
 }
 
-.timeline-entry {
-  position: relative;
-  margin-bottom: 120px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.timeline-entry.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.background-overlay {
+.timeline-slide::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('images/fond-timeline.jpg') center/cover no-repeat;
-  opacity: 0.25;
-  filter: blur(3px);
+  inset: 0;
+  background: rgba(0, 66, 153, 0.35); /* filtre bleu léger */
   z-index: 0;
 }
 
@@ -184,18 +174,26 @@ nav a:hover {
   position: relative;
   z-index: 1;
   max-width: 700px;
-  margin: auto;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+.timeline-slide.visible .timeline-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .big-date {
   font-size: 5em;
   font-family: 'Georgia', serif;
-  font-weight: 400;
+  color: white;
   margin-bottom: 20px;
+  animation: fadeInScale 0.8s ease forwards;
 }
 
 .timeline-content p {
-  font-size: 1.15em;
+  font-size: 1.3em;
   line-height: 1.6;
   color: #fff;
   margin: 0 auto;
@@ -203,11 +201,11 @@ nav a:hover {
 }
 
 .timeline-content em {
-  font-size: 0.9em;
-  color: #ccc;
   display: block;
-  margin-top: 8px;
-}
+  font-size: 0.9em;
+  color: #ddd;
+  margin-top
+
 
 
 /* NEWSLETTER */
