@@ -21,7 +21,7 @@
     <nav>
       <ul>
         <li><a href="https://pastoa.github.io/actualites/">ACTUALITÉS</a></li>
-        <li><a href="#connaitre">MIEUX ME CONNAÎTRE</a></li>
+        <li><a href="https://pastoa.github.io/meconnaitre/">MIEUX ME CONNAÎTRE</a></li>
         <li><a href="#priorites">MES PRIORITÉS</a></li>
         <li><a href="#contact">ME CONTACTER</a></li>
       </ul>
@@ -129,19 +129,6 @@
   <div class="timeline-dates-wrapper">
   <div class="timeline-vertical-line"></div>
   <div class="timeline-dates" id="dates-bar">
-    <span data-index="0" class="active">1989</span>
-    <span data-index="1">1998</span>
-    <span data-index="2">2001</span>
-    <span data-index="3">2003</span>
-    <span data-index="4">2004</span>
-    <span data-index="5">2005</span>
-    <span data-index="6">2008</span>
-    <span data-index="7">2009</span>
-    <span data-index="8">2011</span>
-    <span data-index="9">2012</span>
-    <span data-index="10">2014</span>
-    <span data-index="11">2017</span>
-    <span data-index="12">2021</span>
   </div>
 </div>
 
@@ -226,74 +213,85 @@
   </div>
 </footer>
 
-  <script>
+<script>
   const slides = document.querySelectorAll('.timeline-slide');
-  const dates = document.querySelectorAll('.timeline-dates span');
   const timeline = document.getElementById('timeline');
 
   let index = 0;
   let isScrolling = false;
   let scrollUnlocked = false;
 
+  const allDates = [
+    "1989", "2001", "2003", "2005-07", "2007-08", "2011", "2012-17", "2014", "2015", "2017", "2021"
+  ];
+
+  // === Génération dynamique des dates ===
+  const dateBar = document.getElementById('dates-bar');
+  function renderDates() {
+    dateBar.innerHTML = ''; // reset
+
+    const visibleRange = 3; // 3 avant + 3 après
+    const start = Math.max(0, index - visibleRange);
+    const end = Math.min(allDates.length, index + visibleRange + 1);
+
+    for (let i = start; i < end; i++) {
+      const span = document.createElement('span');
+      span.textContent = allDates[i];
+      if (i === index) span.classList.add('active');
+      span.dataset.index = i;
+      span.addEventListener('click', () => {
+        index = i;
+        updateSlide(index);
+      });
+      dateBar.appendChild(span);
+    }
+  }
+
   function updateSlide(newIndex) {
     slides.forEach((slide, i) => {
       slide.classList.toggle('active', i === newIndex);
-      dates[i].classList.toggle('active', i === newIndex);
     });
+    renderDates();
   }
 
-function unlockScroll() {
-  document.documentElement.style.overflow = 'auto'; // <== pour débloquer le scroll global
-  document.body.style.overflow = 'auto';
-  timeline.classList.add('unlocked');
-  scrollUnlocked = true;
-}
-
-function handleWheel(event) {
-  if (isScrolling || scrollUnlocked) return;
-
-  // ➡️ Vérifie si on est dans la timeline
-  const timelineRect = timeline.getBoundingClientRect();
-  const isInTimeline = timelineRect.top <= 50 && timelineRect.bottom >= window.innerHeight / 2;
-
-  if (!isInTimeline) {
-    return; // ⛔️ Si pas dans la timeline, on ne déclenche pas le slide
+  function unlockScroll() {
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+    scrollUnlocked = true;
   }
 
-  isScrolling = true;
-  const direction = event.deltaY > 0 ? 1 : -1;
-  const nextIndex = index + direction;
+  function handleWheel(event) {
+    if (isScrolling || scrollUnlocked) return;
 
-  if (nextIndex >= 0 && nextIndex < slides.length) {
-    index = nextIndex;
-    updateSlide(index);
+    // Ne capture le scroll QUE dans la timeline
+    const rect = timeline.getBoundingClientRect();
+    const isInTimeline = rect.top <= 50 && rect.bottom >= window.innerHeight / 2;
+    if (!isInTimeline) return;
+
+    isScrolling = true;
+    const direction = event.deltaY > 0 ? 1 : -1;
+    const nextIndex = index + direction;
+
+    if (nextIndex >= 0 && nextIndex < slides.length) {
+      index = nextIndex;
+      updateSlide(index);
+    }
+
+    if (index === slides.length - 1) {
+      setTimeout(unlockScroll, 800);
+    }
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 800);
   }
 
-  // Débloque le scroll à la fin
-  if (index === slides.length - 1) {
-    setTimeout(unlockScroll, 800);
-  }
-
-  setTimeout(() => {
-    isScrolling = false;
-  }, 800);
-}
-
-
-  // Gestion du clic sur les dates
-dates.forEach((date, i) => {
-  date.addEventListener('click', () => {
-    index = i;
-    updateSlide(index);
-  });
-});
-
-
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
     updateSlide(index);
     window.addEventListener('wheel', handleWheel, { passive: true });
   });
 </script>
+
 
   </body>
 
