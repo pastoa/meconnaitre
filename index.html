@@ -188,11 +188,13 @@
     });
   }
 
-  function unlockScroll() {
-    document.body.style.overflow = 'auto';
-    timeline.classList.add('unlocked');
-    scrollUnlocked = true;
-  }
+function unlockScroll() {
+  document.documentElement.style.overflow = 'auto'; // <== pour débloquer le scroll global
+  document.body.style.overflow = 'auto';
+  timeline.classList.add('unlocked');
+  scrollUnlocked = true;
+}
+
 
   function handleWheel(event) {
     if (isScrolling || scrollUnlocked) return;
