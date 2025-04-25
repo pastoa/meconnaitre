@@ -195,28 +195,36 @@ function unlockScroll() {
   scrollUnlocked = true;
 }
 
+function handleWheel(event) {
+  if (isScrolling || scrollUnlocked) return;
 
-  function handleWheel(event) {
-    if (isScrolling || scrollUnlocked) return;
+  // ➡️ Vérifie si on est dans la timeline
+  const timelineRect = timeline.getBoundingClientRect();
+  const isInTimeline = timelineRect.top <= 50 && timelineRect.bottom >= window.innerHeight / 2;
 
-    isScrolling = true;
-    const direction = event.deltaY > 0 ? 1 : -1;
-    const nextIndex = index + direction;
-
-    if (nextIndex >= 0 && nextIndex < slides.length) {
-      index = nextIndex;
-      updateSlide(index);
-    }
-
-    // Débloque le scroll à la fin
-    if (index === slides.length - 1) {
-      setTimeout(unlockScroll, 800);
-    }
-
-    setTimeout(() => {
-      isScrolling = false;
-    }, 800);
+  if (!isInTimeline) {
+    return; // ⛔️ Si pas dans la timeline, on ne déclenche pas le slide
   }
+
+  isScrolling = true;
+  const direction = event.deltaY > 0 ? 1 : -1;
+  const nextIndex = index + direction;
+
+  if (nextIndex >= 0 && nextIndex < slides.length) {
+    index = nextIndex;
+    updateSlide(index);
+  }
+
+  // Débloque le scroll à la fin
+  if (index === slides.length - 1) {
+    setTimeout(unlockScroll, 800);
+  }
+
+  setTimeout(() => {
+    isScrolling = false;
+  }, 800);
+}
+
 
   // Gestion du clic sur les dates
 dates.forEach((date, i) => {
@@ -228,8 +236,6 @@ dates.forEach((date, i) => {
 
 
   document.addEventListener("DOMContentLoaded", () => {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
     updateSlide(index);
     window.addEventListener('wheel', handleWheel, { passive: true });
   });
