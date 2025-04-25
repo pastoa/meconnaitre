@@ -228,6 +228,7 @@ dates.forEach((date, i) => {
 
 
   document.addEventListener("DOMContentLoaded", () => {
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     updateSlide(index);
     window.addEventListener('wheel', handleWheel, { passive: true });
