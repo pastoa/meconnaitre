@@ -221,9 +221,10 @@ nav a:hover {
 
 .timeline-vertical-line {
   width: 2px;
-  height: 40px;
+  height: 80px;
   background-color: white;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  transition: height 0.5s ease;
 }
 
 .timeline-dates {
@@ -237,13 +238,14 @@ nav a:hover {
   font-size: 1.4em;
   color: #ccc;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s; transform 0.3s ease;
 }
 
 .timeline-dates span.active {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
+  transform: scale(1.2);
 }
 
 
