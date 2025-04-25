@@ -292,9 +292,16 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    updateSlide(index);
-    window.addEventListener('wheel', handleWheel, { passive: true });
+  updateSlide(index);
+  window.addEventListener('wheel', handleWheel, { passive: true });
+
+  const toggleBtn = document.getElementById("menu-toggle");
+  const nav = document.querySelector("nav ul");
+
+  toggleBtn.addEventListener("click", () => {
+    nav.classList.toggle("show");
   });
+});
 </script>
 
 
